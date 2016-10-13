@@ -19,6 +19,11 @@ var app = angular.module('app', ['ui.router']);
 				url: '/trip',
 				templateUrl: 'templates/trip.html',
 				controller: 'tripCtrl'
+			})
+			.state('schedule', {
+				url: '/schedule',
+				templateUrl: 'templates/schedule.html',
+				controller: 'scheduleCtrl'
 			});
 	}]);
 })();

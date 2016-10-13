@@ -71,3 +71,10 @@ nav {
 		background-color: $light-text;
 	}
 }
+
+// Tables
+
+.table--col {
+	overflow: scroll;
+	max-height: 500px;
+}
