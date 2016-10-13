@@ -25,5 +25,7 @@ var app = angular.module('app', ['ui.router']);
 				templateUrl: 'templates/schedule.html',
 				controller: 'scheduleCtrl'
 			});
+
+    	$urlRouterProvider.otherwise('/home');
 	}]);
 })();
