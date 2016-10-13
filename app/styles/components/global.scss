@@ -40,6 +40,11 @@ nav {
 		color: $light-text;
 		list-style: none;
 	}
+
+	.collection-header--trip {
+		background-color: $light-text;
+		color: $secondary-text;
+	}
 }
 
 .collection {
@@ -49,5 +54,20 @@ nav {
 
 	a.collection-item {
 		color: $primary-text;
+	}
+}
+
+// Tabs
+.tabs {
+	background-color: $dark-primary-color;
+
+	.tab {
+		a {
+			color: $light-text;
+		}
+	}
+
+	.indicator {
+		background-color: $light-text;
 	}
 }
