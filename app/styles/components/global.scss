@@ -2,8 +2,15 @@ html, body, main {
 	height: 100%;
 }
 
+main {
+	position: relative;
+	bottom: 64px;
+}
+
 nav {
 	background-color: $dark-primary-color;
+	position: relative;
+	z-index: 1;
 }
 
 // Buttons
@@ -19,4 +26,28 @@ nav {
 .btn-large {
 	height: 70px;
 	line-height: 70px;
+}
+
+.btn--accent {
+	background-color: $accent-color;
+	margin-top: 50px;
+}
+
+// Collections
+.collection.with-header {
+	.collection-header {
+		background-color: $dark-primary-color;
+		color: $light-text;
+		list-style: none;
+	}
+}
+
+.collection {
+	.collection-item.active {
+		background-color: $accent-color;
+	}
+
+	a.collection-item {
+		color: $primary-text;
+	}
 }
