@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="eng" ng-app="app">
   <head>
     <meta charset="utf-8">
     <meta name="description" content="">
@@ -23,21 +23,22 @@
     <script src="/bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
   </head>
-  <body>
+  <body ng-controller="indexCtrl">
     <!--[if lt IE 10]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    
-    <div class="hero-unit">
-      <h1>'Allo, 'Allo!</h1>
-      <p>You now have</p>
-      <ul>
-        <li>HTML5 Boilerplate</li>
-        <li>Sass</li>
-        <li>Modernizr</li>
-        <li>jQuery</li>
-      </ul>
-    </div>
+
+    <nav>
+      <div class="nav-wrapper">
+        <div class="container">
+          <a href="#" class="brand-logo">BART Planner</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <ui-view></ui-view>
+    </main>
     
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
@@ -63,6 +64,10 @@
     
     <!-- build:js scripts/main.js -->
     <script src="scripts/main.js"></script>
+    <script src="scripts/controllers/indexCtrl.js"></script>
+    <script src="scripts/controllers/homeCtrl.js"></script>
+    <script src="scripts/controllers/plannerCtrl.js"></script>
+    <script src="scripts/controllers/tripCtrl.js"></script>
     <!-- endbuild -->
   </body>
 </html>

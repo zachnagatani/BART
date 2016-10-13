@@ -1,0 +1,22 @@
+html, body, main {
+	height: 100%;
+}
+
+nav {
+	background-color: $dark-primary-color;
+}
+
+// Buttons
+.btn, .btn-large {
+	background-color: $dark-primary-color;
+	white-space: normal;
+}
+
+.btn:hover, .btn-large:hover {
+	background-color: $light-primary-color;
+}
+
+.btn-large {
+	height: 70px;
+	line-height: 70px;
+}
