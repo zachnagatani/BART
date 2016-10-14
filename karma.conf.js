@@ -14,11 +14,13 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+        'bower_components/jquery/dist/jquery.js',
         'bower_components/angular/angular.js',
         'bower_components/angular-animate/angular-animate.js',
         'bower_components/angular-aria/angular-aria.js',
         'bower_components/angular-ui-router/release/angular-ui-router.js',
         'bower_components/angular-mocks/angular-mocks.js',
+        'bower_components/jasmine-jquery/lib/jasmine-jquery.js',
         'app/scripts/main.js',
         'app/scripts/controllers/indexCtrl.js',
         'app/scripts/controllers/homeCtrl.js',

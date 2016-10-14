@@ -6,3 +6,11 @@
 	max-height: 500px;
 	overflow-y: scroll;
 }
+
+.planner__row {
+	// transition: all 1s;
+}
+
+.planner__row.ng-hide {
+	opacity: 0;
+}
