@@ -29,11 +29,11 @@
 					<div class="container">
 						<form action="POST" class="time-form">
 							<label for="time">Enter your date and time</label>
-							<input type="datetime-local" name="time" id="time">
+							<input ng-model="time" type="time" name="time" id="time">
 						</form>
 						<div class="row">
 							<div class="col s12 center-align">
-								<button type="button" class="btn btn-large btn--accent">Plan My Trip!</button><br><br>
+								<button type="button" class="btn btn-large btn--accent" ng-click="getInfo(time)">Plan My Trip!</button><br><br>
 								<a href="" class="text--secondary link--underlined">Choose a different departure station</a><br><br>
 								<a href="" class="text--secondary link--underlined">Choose a different arrival station</a>
 							</div>

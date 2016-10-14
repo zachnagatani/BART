@@ -103,7 +103,7 @@
 
 		$scope.getInfo = function(time) {
 			var url = $scope.getInfoURL(time);
-			
+			console.log(url);
 			apiCalls.makeCall(url)
 				.then(function(response) {
 					return xmlToJSON.dataToDoc(response.data);
