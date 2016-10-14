@@ -24,8 +24,10 @@
 		};
 
 		$scope.init();
+
 		$scope.arrivalSelected = true;
 		$scope.timeSelected = true;
+		$scope.time = null;
 
 		$scope.setDepartureStation = function(station) {
 				$scope.departureStation = station.abbr['#text'];
@@ -73,6 +75,14 @@
 			arrivalTime = arrivalTime + '+' + marker;
 
 			return arrivalTime;
+		};
+
+		$scope.getInfoURL = function(time) {
+			$scope.time = $scope.formatTime(time);
+			var URL = 'http://api.bart.gov/api/sched.aspx?cmd=arrive&orig=' + $scope.departureStation + 
+				'&dest=' + $scope.arrivalStation + '&time=' + $scope.time + '&date=now&key=MW9S-E7SL-26DU-VV8V&b=2&a=2&l=1';
+
+			return URL;
 		};
 	}]);
 })();

@@ -159,5 +159,26 @@
 				expect($scope.formatTime(time)).toEqual('10:10+PM');
 			});
 		});
+
+		describe('getInfoURL', function() {
+			it('should receive the formatted time from formatTime', function() {
+				var time = '2016-10-07T22:10';
+				$scope.getInfoURL(time);
+				expect($scope.time).toEqual('10:10+PM');
+			});
+
+			it('should create a properly formatted URL for the BART api', function() {
+				$scope.departureStation = '12TH';
+				$scope.arrivalStation = 'CIVC';
+				var time = '2016-10-07T22:10';
+				var testURL = 'http://api.bart.gov/api/sched.aspx?cmd=arrive&orig=12TH&dest=CIVC&time=10:10+PM&date=now&key=MW9S-E7SL-26DU-VV8V&b=2&a=2&l=1';
+				
+				expect($scope.getInfoURL(time)).toEqual(testURL);
+			});
+		});
+
+		describe('getInfo', function() {
+
+		});
 	});
 })();
