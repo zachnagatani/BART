@@ -39,32 +39,32 @@
 		describe('setDepartureStation method', function() {
 			it('should set $scope.departureStation to the abbreviation of the clicked station', function() {	
 				var currentStation = {
-	"name": {
-		"#text": "12th St. Oakland City Center"
+	'name': {
+		'#text': '12th St. Oakland City Center'
 	},
-	"abbr": {
-		"#text": "12TH"
+	'abbr': {
+		'#text': '12TH'
 	},
-	"gtfs_latitude": {
-		"#text": "37.803664"
+	'gtfs_latitude': {
+		'#text': '37.803664'
 	},
-	"gtfs_longitude": {
-		"#text": "-122.271604"
+	'gtfs_longitude': {
+		'#text': '-122.271604'
 	},
-	"address": {
-		"#text": "1245 Broadway"
+	'address': {
+		'#text': '1245 Broadway'
 	},
-	"city": {
-		"#text": "Oakland"
+	'city': {
+		'#text': 'Oakland'
 	},
-	"county": {
-		"#text": "alameda"
+	'county': {
+		'#text': 'alameda'
 	},
-	"state": {
-		"#text": "CA"
+	'state': {
+		'#text': 'CA'
 	},
-	"zipcode": {
-		"#text": "94612"
+	'zipcode': {
+		'#text': '94612'
 	}
 				}
 
@@ -77,32 +77,32 @@
 		describe('setArrivalStation method', function() {
 			it('should set $scope.arrivalStation to the abbreviation of the clicked station', function() {	
 				var currentStation = {
-					"name": {
-						"#text": "12th St. Oakland City Center"
+					'name': {
+						'#text': '12th St. Oakland City Center'
 					},
-					"abbr": {
-						"#text": "12TH"
+					'abbr': {
+						'#text': '12TH'
 					},
-					"gtfs_latitude": {
-						"#text": "37.803664"
+					'gtfs_latitude': {
+						'#text': '37.803664'
 					},
-					"gtfs_longitude": {
-						"#text": "-122.271604"
+					'gtfs_longitude': {
+						'#text': '-122.271604'
 					},
-					"address": {
-						"#text": "1245 Broadway"
+					'address': {
+						'#text': '1245 Broadway'
 					},
-					"city": {
-						"#text": "Oakland"
+					'city': {
+						'#text': 'Oakland'
 					},
-					"county": {
-						"#text": "alameda"
+					'county': {
+						'#text': 'alameda'
 					},
-					"state": {
-						"#text": "CA"
+					'state': {
+						'#text': 'CA'
 					},
-					"zipcode": {
-						"#text": "94612"
+					'zipcode': {
+						'#text': '94612'
 					}
 				}
 
@@ -178,7 +178,264 @@
 		});
 
 		describe('getInfo', function() {
+				it('should set $scope.trips to the trips from the BART api in JSON form', function() {
+					$scope.departureStation = '12TH';
+					$scope.arrivalStation = 'CIVC';	
+					var time = '2016-10-07T22:10';
+					var trips = [{
+						'@attributes': {
+							'origin': '12TH',
+							'destination': 'CIVC',
+							'fare': '3.45',
+							'origTimeMin': '9:20 PM',
+							'origTimeDate': '10/13/2016 ',
+							'destTimeMin': '9:36 PM',
+							'destTimeDate': '10/13/2016',
+							'clipper': '1.25',
+							'tripTime': '16',
+							'co2': '8.54'
+						},
+						'fares': {
+							'@attributes': {
+								'level': 'normal'
+							},
+							'fare': [{
+								'@attributes': {
+									'amount': '3.45',
+									'class': 'cash'
+								}
+							}, {
+								'@attributes': {
+									'amount': '1.25',
+									'class': 'rtcclipper'
+								}
+							}]
+						},
+						'leg': {
+							'@attributes': {
+								'order': '1',
+								'transfercode': '',
+								'origin': '12TH',
+								'destination': 'CIVC',
+								'origTimeMin': '9:20 PM',
+								'origTimeDate': '10/13/2016',
+								'destTimeMin': '9:36 PM',
+								'destTimeDate': '10/13/2016',
+								'line': 'ROUTE 1',
+								'bikeflag': '1',
+								'trainHeadStation': 'MLBR',
+								'trainId': '363102037',
+								'trainIdx': '86'
+							}
+						}
+					}, {
+						'@attributes': {
+							'origin': '12TH',
+							'destination': 'CIVC',
+							'fare': '3.45',
+							'origTimeMin': '9:40 PM',
+							'origTimeDate': '10/13/2016 ',
+							'destTimeMin': '9:56 PM',
+							'destTimeDate': '10/13/2016',
+							'clipper': '1.25',
+							'tripTime': '16',
+							'co2': '8.54'
+						},
+						'fares': {
+							'@attributes': {
+								'level': 'normal'
+							},
+							'fare': [{
+								'@attributes': {
+									'amount': '3.45',
+									'class': 'cash'
+								}
+							}, {
+								'@attributes': {
+									'amount': '1.25',
+									'class': 'rtcclipper'
+								}
+							}]
+						},
+						'leg': {
+							'@attributes': {
+								'order': '1',
+								'transfercode': '',
+								'origin': '12TH',
+								'destination': 'CIVC',
+								'origTimeMin': '9:40 PM',
+								'origTimeDate': '10/13/2016',
+								'destTimeMin': '9:56 PM',
+								'destTimeDate': '10/13/2016',
+								'line': 'ROUTE 1',
+								'bikeflag': '1',
+								'trainHeadStation': 'MLBR',
+								'trainId': '367102057',
+								'trainIdx': '87'
+							}
+						}
+					}, {
+						'@attributes': {
+							'origin': '12TH',
+							'destination': 'CIVC',
+							'fare': '3.45',
+							'origTimeMin': '10:00 PM',
+							'origTimeDate': '10/13/2016 ',
+							'destTimeMin': '10:16 PM',
+							'destTimeDate': '10/13/2016',
+							'clipper': '1.25',
+							'tripTime': '16',
+							'co2': '8.54'
+						},
+						'fares': {
+							'@attributes': {
+								'level': 'normal'
+							},
+							'fare': [{
+								'@attributes': {
+									'amount': '3.45',
+									'class': 'cash'
+								}
+							}, {
+								'@attributes': {
+									'amount': '1.25',
+									'class': 'rtcclipper'
+								}
+							}]
+						},
+						'leg': {
+							'@attributes': {
+								'order': '1',
+								'transfercode': '',
+								'origin': '12TH',
+								'destination': 'CIVC',
+								'origTimeMin': '10:00 PM',
+								'origTimeDate': '10/13/2016',
+								'destTimeMin': '10:16 PM',
+								'destTimeDate': '10/13/2016',
+								'line': 'ROUTE 1',
+								'bikeflag': '1',
+								'trainHeadStation': 'MLBR',
+								'trainId': '369102117',
+								'trainIdx': '88'
+							}
+						}
+					}, {
+						'@attributes': {
+							'origin': '12TH',
+							'destination': 'CIVC',
+							'fare': '3.45',
+							'origTimeMin': '10:20 PM',
+							'origTimeDate': '10/13/2016 ',
+							'destTimeMin': '10:36 PM',
+							'destTimeDate': '10/13/2016',
+							'clipper': '1.25',
+							'tripTime': '16',
+							'co2': '8.54'
+						},
+						'fares': {
+							'@attributes': {
+								'level': 'normal'
+							},
+							'fare': [{
+								'@attributes': {
+									'amount': '3.45',
+									'class': 'cash'
+								}
+							}, {
+								'@attributes': {
+									'amount': '1.25',
+									'class': 'rtcclipper'
+								}
+							}]
+						},
+						'leg': {
+							'@attributes': {
+								'order': '1',
+								'transfercode': '',
+								'origin': '12TH',
+								'destination': 'CIVC',
+								'origTimeMin': '10:20 PM',
+								'origTimeDate': '10/13/2016',
+								'destTimeMin': '10:36 PM',
+								'destTimeDate': '10/13/2016',
+								'line': 'ROUTE 1',
+								'bikeflag': '1',
+								'trainHeadStation': 'MLBR',
+								'trainId': '371052137',
+								'trainIdx': '89'
+							}
+						}
+					}];
 
+					$scope.getInfo(time);
+
+					// Use setTimeout for async simulation
+					setTimeout(function() {
+							expect($scope.trips).toEqual(trips);
+					}, 5000);
+				});
+
+				it('should contain an array with trip objects', function() {
+					$scope.departureStation = '12TH';
+					$scope.arrivalStation = 'CIVC';
+					var URL = 'http://api.bart.gov/api/sched.aspx?cmd=arrive&orig=12TH&dest=CIVC&time=10:10+PM&date=now&key=MW9S-E7SL-26DU-VV8V&b=2&a=2&l=1';
+					var time = '2016-10-07T22:10';
+					var trip = {
+						'@attributes': {
+							'origin': '12TH',
+							'destination': 'CIVC',
+							'fare': '3.45',
+							'origTimeMin': '9:20 PM',
+							'origTimeDate': '10/13/2016 ',
+							'destTimeMin': '9:36 PM',
+							'destTimeDate': '10/13/2016',
+							'clipper': '1.25',
+							'tripTime': '16',
+							'co2': '8.54'
+						},
+						'fares': {
+							'@attributes': {
+								'level': 'normal'
+							},
+							'fare': [{
+								'@attributes': {
+									'amount': '3.45',
+									'class': 'cash'
+								}
+							}, {
+								'@attributes': {
+									'amount': '1.25',
+									'class': 'rtcclipper'
+								}
+							}]
+						},
+						'leg': {
+							'@attributes': {
+								'order': '1',
+								'transfercode': '',
+								'origin': '12TH',
+								'destination': 'CIVC',
+								'origTimeMin': '9:20 PM',
+								'origTimeDate': '10/13/2016',
+								'destTimeMin': '9:36 PM',
+								'destTimeDate': '10/13/2016',
+								'line': 'ROUTE 1',
+								'bikeflag': '1',
+								'trainHeadStation': 'MLBR',
+								'trainId': '363102037',
+								'trainIdx': '86'
+							}
+						}
+					};
+
+					$scope.getInfo(time);
+
+					// Use setTimeout for async simulation
+					setTimeout(function() {
+						expect($scope.trips[0]).toEqual(trip);
+					}, 5000);
+				});
 		});
 	});
 })();

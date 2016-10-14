@@ -24,6 +24,22 @@
 		};
 
 		$scope.init();
+		$scope.trips = null;
+
+
+		(function() {
+			apiCalls.makeCall('http://api.bart.gov/api/sched.aspx?cmd=arrive&orig=12TH&dest=CIVC&time=10:10+PM&date=now&key=MW9S-E7SL-26DU-VV8V&b=2&a=2&l=1')
+				.then(function(response) {
+					return xmlToJSON.dataToDoc(response.data);
+				})
+				.then(function(xml) {
+					return xmlToJSON.xmlToJSON(xml);
+				})
+				.then(function(json) {
+					$scope.trips = json.root.schedule.request.trip;
+					console.log($scope.trips);
+				});
+		})();
 
 		$scope.arrivalSelected = true;
 		$scope.timeSelected = true;
@@ -83,6 +99,22 @@
 				'&dest=' + $scope.arrivalStation + '&time=' + $scope.time + '&date=now&key=MW9S-E7SL-26DU-VV8V&b=2&a=2&l=1';
 
 			return URL;
+		};
+
+		$scope.getInfo = function(time) {
+			var url = $scope.getInfoURL(time);
+			
+			apiCalls.makeCall(url)
+				.then(function(response) {
+					return xmlToJSON.dataToDoc(response.data);
+				})
+				.then(function(xml) {
+					return xmlToJSON.xmlToJSON(xml);
+				})
+				.then(function(json) {
+					$scope.trips = json.root.schedule.request.trip;
+					console.log(JSON.stringify($scope.trips[0]));
+				});
 		};
 	}]);
 })();
