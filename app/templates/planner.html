@@ -4,16 +4,9 @@
 			<div class="col m6 offset-m3 s12">
 				<div class="collection with-header z-depth-1">
 					<li class="collection-header"><h5 class="center-align">Choose a Departure Station</h5></li>
-					<a href="" class="collection-item">Alvin</a>
-					<a href="" class="collection-item">Alvin</a>
-					<a href="" class="collection-item">Alvin</a>
-					<a href="" class="collection-item">Alvin</a>
-					<a href="" class="collection-item">Alvin</a>
-					<a href="" class="collection-item">Alvin</a>
-					<a href="" class="collection-item">Alvin</a>
-					<a href="" class="collection-item">Alvin</a>
-					<a href="" class="collection-item">Alvin</a>
-					<a href="" class="collection-item">Alvin</a>
+					<section class="collection__stations">
+						<a href="" class="collection-item" ng-repeat="station in stations">{{ station.name['#text'] }}</a>
+					</section>
 				</div>
 			</div>
 		</div>
