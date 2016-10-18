@@ -1,7 +1,15 @@
+.container--trips {
+	margin-top: 160px;
+}
+
 .card-panel--trip {
 	margin-top: 0;
 }
 
 .trip__row {
 	margin-bottom: 0;
+}
+
+.trip:not(:first-of-type) {
+	display: none;
 }
