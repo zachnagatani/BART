@@ -13,6 +13,8 @@
 				id++;
 			});
 
+			console.log($scope.trips);
+
 			$('ul.tabs').tabs();		
   		};
 

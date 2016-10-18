@@ -109,12 +109,12 @@
 	    			<header class="trip__header text--secondary center-align">
 		    			<h4 class="">The Big Picture</h4>
 		    			<div class="row trip__row">
-		    				<div class="col m4 offset-m2"><p class="">Departs: 1:00PM</p></div>
-		    				<div class="col m4"><p class="">Arrives: 2:00PM</p></div>
+		    				<div class="col m4 offset-m2"><p class="">Departs from  {{ trip['@attributes'].origin }} at {{ trip['@attributes'].origTimeMin }}</p></div>
+		    				<div class="col m4"><p class="">Arrives at  {{ trip['@attributes'].destination }} at {{ trip['@attributes'].destTimeMin }}</p></div>
 		    			</div>
 		    			<div class="row">
 		    				<div class="col m8 offset-m2">
-		    					<p class="">Costs: $5.00 ($3.00 w/Compass)</p>
+		    					<p class="">Costs: ${{ trip['@attributes'].fare }} (${{ trip['@attributes'].clipper }} w/Clipper)</p>
 		    				</div>
 		    			</div>
 	    			</header>
