@@ -9,81 +9,238 @@
 		<div class="row">
 			<div class="col s12">
 		      <ul class="tabs z-depth-1">
-		        <li class="tab col s2"><a href="#route1">Pittsburg-SFO</a></li>
-		        <li class="tab col s2"><a href="#route2">Fremont-Richmond</a></li>
-		        <li class="tab col s2"><a href="#route3">Richmond-Millbrae</a></li>
-		        <li class="tab col s2"><a href="#route4">Dublin-Daly City</a></li>
-		        <li class="tab col s2"><a href="#route5">Fremont-Daly City</a></li>
-		        <li class="tab col s2"><a href="#route6">Coliseum-OAK</a></li>
+		        <li class="tab col s2"><a href="#route1" ng-click="hideTables()">Pittsburg-SFO</a></li>
+		        <li class="tab col s2"><a href="#route2" ng-click="hideTables()">Fremont-Richmond</a></li>
+		        <li class="tab col s2"><a href="#route3" ng-click="hideTables()">Richmond-Millbrae</a></li>
+		        <li class="tab col s2"><a href="#route4" ng-click="hideTables()">Dublin-Daly City</a></li>
+		        <li class="tab col s2"><a href="#route5" ng-click="hideTables()">Fremont-Daly City</a></li>
+		        <li class="tab col s2"><a href="#route6" ng-click="hideTables()">Coliseum-OAK</a></li>
 		      </ul>
 			</div>
 
 			<div id="route1" class="col l12">
 				<ul class="tabs z-depth-1">
-					<li class="tab col l6"><a href="#route1a" ng-click="test()">Pittsburg-SFO</a></li>
-					<li class="tab col l6"><a href="#route1b">SFO-Pittsburg</a></li>
+					<li class="tab col l6"><a href="#route1a" ng-click="getSchedule(1)">Pittsburg-SFO</a></li>
+					<li class="tab col l6"><a href="#route1b" ng-click="getSchedule(2)">SFO-Pittsburg</a></li>
 				</ul>
 			</div>
 
 			<div id="route2" class="col l12">
 				<ul class="tabs z-depth-1">
-					<li class="tab col l6"><a href="#route2a">Fremont-Richmond</a></li>
-					<li class="tab col l6"><a href="#b">Richmond-Fremont</a></li>
+					<li class="tab col l6"><a href="#route2a" ng-click="getSchedule(3)">Fremont-Richmond</a></li>
+					<li class="tab col l6"><a href="#route2b" ng-click="getSchedule(4)">Richmond-Fremont</a></li>
 				</ul>
 			</div>
 
 			<div id="route3" class="col l12">
 				<ul class="tabs z-depth-1">
-					<li class="tab col l6"><a href="#a">Richmond-Millbrae</a></li>
-					<li class="tab col l6"><a href="#b">Millbrae-Richmond</a></li>
+					<li class="tab col l6"><a href="#route3a" ng-click="getSchedule(7)">Richmond-Millbrae</a></li>
+					<li class="tab col l6"><a href="#route3b" ng-click="getSchedule(8)">Millbrae-Richmond</a></li>
 				</ul>
 			</div>
 
 			<div id="route4" class="col l12">
 				<ul class="tabs z-depth-1">
-					<li class="tab col l6"><a href="#a">Dublin-Daly City</a></li>
-					<li class="tab col l6"><a href="#b">Daly City-Dublin</a></li>
+					<li class="tab col l6"><a href="#route4a" ng-click="getSchedule(11)">Dublin-Daly City</a></li>
+					<li class="tab col l6"><a href="#route4b" ng-click="getSchedule(12)">Daly City-Dublin</a></li>
 				</ul>
 			</div>
 
 			<div id="route5" class="col l12">
 				<ul class="tabs z-depth-1">
-					<li class="tab col l6"><a href="#a">Fremont-Daly City</a></li>
-					<li class="tab col l6"><a href="#b">Daly City-Fremont</a></li>
+					<li class="tab col l6"><a href="#route5a" ng-click="getSchedule(5)">Fremont-Daly City</a></li>
+					<li class="tab col l6"><a href="#route5b" ng-click="getSchedule(6)">Daly City-Fremont</a></li>
 				</ul>
 			</div>
 
 			<div id="route6" class="col l12">
 				<ul class="tabs z-depth-1">
-					<li class="tab col l6"><a href="#a">Coliseum-OAK</a></li>
-					<li class="tab col l6"><a href="#b">Oak-Coliseum</a></li>
+					<li class="tab col l6"><a href="#route6a" ng-click="getSchedule(20)">Coliseum-OAK</a></li>
+					<li class="tab col l6"><a href="#route6b" ng-click="getSchedule(19)">Oak-Coliseum</a></li>
 				</ul>
 			</div>
 
-			<div class="col s12 table--col" id="route1a">
+			<div class="col s12 table--col table--schedule" id="route1a">
 				<table class="striped responsive-table">
 					<thead>
-						<th>poop</th>
+						<tr>
+							<th ng-repeat="stop in schedule.root.route.train[0].stop">{{ stop['@attributes'].station }}</th>
+						</tr>
 					</thead>
 					
 					<tbody>
+						<tr ng-repeat="train in schedule.root.route.train">
+							<td ng-repeat="stop in train.stop">{{ stop['@attributes'].origTime }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col s12 table--col table--schedule" id="route1b">
+				<table class="striped responsive-table">
+					<thead>
 						<tr>
-							<td>pee</td>
+							<th ng-repeat="stop in schedule.root.route.train[0].stop">{{ stop['@attributes'].station }}</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr ng-repeat="train in schedule.root.route.train">
+							<td ng-repeat="stop in train.stop">{{ stop['@attributes'].origTime }}</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 
-
-			<div class="col s12 table--col" id="route1b">
+			<div class="col s12 table--col table--schedule" id="route2a">
 				<table class="striped responsive-table">
 					<thead>
-						<th>pee</th>
+						<tr>
+							<th ng-repeat="stop in schedule.root.route.train[0].stop">{{ stop['@attributes'].station }}</th>
+						</tr>
 					</thead>
 					
 					<tbody>
+						<tr ng-repeat="train in schedule.root.route.train">
+							<td ng-repeat="stop in train.stop">{{ stop['@attributes'].origTime }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col s12 table--col table--schedule" id="route2b">
+				<table class="striped responsive-table">
+					<thead>
 						<tr>
-							<td>poop</td>
+							<th ng-repeat="stop in schedule.root.route.train[0].stop">{{ stop['@attributes'].station }}</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr ng-repeat="train in schedule.root.route.train">
+							<td ng-repeat="stop in train.stop">{{ stop['@attributes'].origTime }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="col s12 table--col table--schedule" id="route3a">
+				<table class="striped responsive-table">
+					<thead>
+						<tr>
+							<th ng-repeat="stop in schedule.root.route.train[0].stop">{{ stop['@attributes'].station }}</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr ng-repeat="train in schedule.root.route.train">
+							<td ng-repeat="stop in train.stop">{{ stop['@attributes'].origTime }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col s12 table--col table--schedule" id="route3b">
+				<table class="striped responsive-table">
+					<thead>
+						<tr>
+							<th ng-repeat="stop in schedule.root.route.train[0].stop">{{ stop['@attributes'].station }}</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr ng-repeat="train in schedule.root.route.train">
+							<td ng-repeat="stop in train.stop">{{ stop['@attributes'].origTime }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="col s12 table--col table--schedule" id="route4a">
+				<table class="striped responsive-table">
+					<thead>
+						<tr>
+							<th ng-repeat="stop in schedule.root.route.train[0].stop">{{ stop['@attributes'].station }}</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr ng-repeat="train in schedule.root.route.train">
+							<td ng-repeat="stop in train.stop">{{ stop['@attributes'].origTime }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col s12 table--col table--schedule" id="route4b">
+				<table class="striped responsive-table">
+					<thead>
+						<tr>
+							<th ng-repeat="stop in schedule.root.route.train[0].stop">{{ stop['@attributes'].station }}</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr ng-repeat="train in schedule.root.route.train">
+							<td ng-repeat="stop in train.stop">{{ stop['@attributes'].origTime }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="col s12 table--col table--schedule" id="route5a">
+				<table class="striped responsive-table">
+					<thead>
+						<tr>
+							<th ng-repeat="stop in schedule.root.route.train[0].stop">{{ stop['@attributes'].station }}</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr ng-repeat="train in schedule.root.route.train">
+							<td ng-repeat="stop in train.stop">{{ stop['@attributes'].origTime }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col s12 table--col table--schedule" id="route5b">
+				<table class="striped responsive-table">
+					<thead>
+						<tr>
+							<th ng-repeat="stop in schedule.root.route.train[0].stop">{{ stop['@attributes'].station }}</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr ng-repeat="train in schedule.root.route.train">
+							<td ng-repeat="stop in train.stop">{{ stop['@attributes'].origTime }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="col s12 table--col table--schedule" id="route6a">
+				<table class="striped responsive-table">
+					<thead>
+						<tr>
+							<th ng-repeat="stop in schedule.root.route.train[0].stop">{{ stop['@attributes'].station }}</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr ng-repeat="train in schedule.root.route.train">
+							<td ng-repeat="stop in train.stop">{{ stop['@attributes'].origTime }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col s12 table--col table--schedule" id="route6b">
+				<table class="striped responsive-table">
+					<thead>
+						<tr>
+							<th ng-repeat="stop in schedule.root.route.train[0].stop">{{ stop['@attributes'].station }}</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr ng-repeat="train in schedule.root.route.train">
+							<td ng-repeat="stop in train.stop">{{ stop['@attributes'].origTime }}</td>
 						</tr>
 					</tbody>
 				</table>
