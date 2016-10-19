@@ -15,7 +15,7 @@
 
 			console.log($scope.trips);
 
-			$('ul.tabs').tabs();		
+			$('ul.tabs').tabs();	
   		};
 
 		$timeout($scope.addID, 1000);

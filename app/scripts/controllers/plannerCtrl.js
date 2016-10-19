@@ -35,6 +35,10 @@
 		$scope.timeSelected = true;
 		$scope.time = null;
 
+		$scope.reload = function() {
+			$state.reload();
+		};
+
 		$scope.setDepartureStation = function(station) {
 				$scope.departureStation = station.abbr['#text'];
 				$scope.departureSelectedtoTrue();
