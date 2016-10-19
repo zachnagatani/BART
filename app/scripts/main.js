@@ -28,4 +28,5 @@ var app = angular.module('app', ['ui.router', 'ngAnimate']);
 
     	$urlRouterProvider.otherwise('/home');
 	}]);
+
 })();

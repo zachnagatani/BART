@@ -247,6 +247,14 @@
 
 				$scope.trips = [{}, {}, {}];
 
+				$scope.addID = function() {
+					var id = 1;
+					$scope.trips.forEach(function(trip) {
+						trip.id = id;
+						id++;
+					});
+				};
+
 				$scope.addID();
 
 				expect($scope.trips).toEqual(tripsWithID);
