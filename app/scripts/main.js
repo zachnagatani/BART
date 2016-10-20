@@ -6,7 +6,7 @@ var dbPromise = idb.open('bart', 2, function(upgradeDb) {
 			var keyValStore = upgradeDb.createObjectStore('keyval');
 			keyValStore.put('world', 'hello');
 		case 1:
-			var stations = upgradeDb.createObjectStore('stations');
+			var stations = upgradeDb.createObjectStore('stations', {keyPath: '$$hashKey'});
 	}
 });
 

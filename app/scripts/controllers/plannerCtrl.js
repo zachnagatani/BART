@@ -20,6 +20,16 @@
 				console.log(json.root.stations.station);
 				return json.root.stations.station;
 			}).then(function(stations) {
+				// Push stations in IDB
+				dbPromise
+					.then(function(db) {
+						var tx = db.transaction('stations', 'readwrite');
+						var store = tx.objectStore('stations');
+						stations.forEach(function(station) {
+							store.put(station);
+						});
+					});
+
 				// Push each station into the empty stations array
 				stations.forEach(function(station) {
 					$scope.stations.push(station);
