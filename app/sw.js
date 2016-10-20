@@ -1,5 +1,4 @@
-var staticCache = 'static-cache-v1';
-var bowerCache = 'bower-cache-v1';
+var staticCache = 'static-cache-v2';
 
 this.addEventListener('install', function(event) {
 	event.waitUntil(
@@ -51,7 +50,7 @@ function fetchAndCache(myCache, request) {
 this.addEventListener('fetch', function(event) {
 	var requestURL = new URL(event.request.url);
 
-	if(requestURL.href.startsWith('http://localhost:9000/')) {
+	if(requestURL.href.startsWith('http://localhost:9000/') && !requestURL.href.startsWith('http://localhost:9000/browser-sync/')) {
 		event.respondWith(fetchAndCache(staticCache, event.request));
 	}
 });
