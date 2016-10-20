@@ -17,6 +17,7 @@
 				return xmlToJSON.xmlToJSON(XML);
 			}).then(function(json) {
 				// return the stations from the JSON
+				console.log(json.root.stations.station);
 				return json.root.stations.station;
 			}).then(function(stations) {
 				// Push each station into the empty stations array
