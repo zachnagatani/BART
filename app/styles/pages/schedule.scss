@@ -6,3 +6,26 @@
 .table--schedule {
 	display: none;
 }
+
+.tab--pitt-sfo {
+	background: #F5EE30;
+	a {
+		color: $secondary-text!important;
+	}
+}
+
+.tab--rich-mill {
+	background: #E95A5F;
+}
+
+.tab--dub-daly {
+	background: #13A89E;
+}
+
+.tab--frem-daly {
+	background: #A0D061;
+}
+
+.tab--col-oak {
+	background: #CCA77F;
+}

@@ -12,6 +12,9 @@
 				}).then(function(data) {
 					// turns the data into an XML node
 					return xmlToJSON.dataToDoc(data);
+				}, function(error) {
+					// Materialize.toast(message, displayLength, className, completeCallback);
+					Materialize.toast('Please reconnect to the internet', 4000);					
 				}).then(function(XML) {
 					// converts the xml into JSON
 					return xmlToJSON.xmlToJSON(XML);
@@ -149,6 +152,9 @@
 			apiCalls.makeCall(url)
 				.then(function(response) {
 					return xmlToJSON.dataToDoc(response.data);
+				}, function(error) {
+					// Materialize.toast(message, displayLength, className, completeCallback);
+					Materialize.toast('Please reconnect to the internet', 4000);
 				})
 				.then(function(xml) {
 					return xmlToJSON.xmlToJSON(xml);
