@@ -1,4 +1,4 @@
-var staticCache = 'static-cache-v2';
+var staticCache = 'static-cache-v4';
 
 this.addEventListener('install', function(event) {
 	event.waitUntil(

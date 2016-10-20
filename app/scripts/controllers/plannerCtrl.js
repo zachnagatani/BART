@@ -6,35 +6,76 @@
 
 		// Initialization function
 		$scope.init = function(){
-			// makes call to the stations endpoint of the BART API
-			apiCalls.makeCall('http://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V').then(function(response) {
-				return response.data;
-			}).then(function(data) {
-				// turns the data into an XML node
-				return xmlToJSON.dataToDoc(data);
-			}).then(function(XML) {
-				// converts the xml into JSON
-				return xmlToJSON.xmlToJSON(XML);
-			}).then(function(json) {
-				// return the stations from the JSON
-				console.log(json.root.stations.station);
-				return json.root.stations.station;
-			}).then(function(stations) {
-				// Push stations in IDB
+			function getStationsHTTP() {
+				console.log('There were no stations in IDB... getStationsHTTP has been invoked!');
+				// makes call to the stations endpoint of the BART API
+				apiCalls.makeCall('http://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V').then(function(response) {
+					return response.data;
+				}).then(function(data) {
+					// turns the data into an XML node
+					return xmlToJSON.dataToDoc(data);
+				}).then(function(XML) {
+					// converts the xml into JSON
+					return xmlToJSON.xmlToJSON(XML);
+				}).then(function(json) {
+					// return the stations from the JSON
+					return json.root.stations.station;
+				}).then(function(stations) {
+					// Push stations in IDB
+					dbPromise
+						.then(function(db) {
+							var tx = db.transaction('stations', 'readwrite');
+							var store = tx.objectStore('stations');
+							stations.forEach(function(station) {
+								store.put(station);
+							});
+						});
+
+					// Push each station into the empty stations array
+					stations.forEach(function(station) {
+						$scope.stations.push(station);
+					});
+				});
+			};
+
+			function getStationsIDB() {
 				dbPromise
 					.then(function(db) {
-						var tx = db.transaction('stations', 'readwrite');
-						var store = tx.objectStore('stations');
+						// Begin another transaction
+						var tx = db.transaction('stations');
+						var stationsStore = tx.objectStore('stations');
+						// Read all the stations from the object store
+						return stationsStore.getAll();
+					})
+					.then(function(stations) {
+						// Push the stations onto $scope
 						stations.forEach(function(station) {
-							store.put(station);
+							$scope.stations.push(station);
 						});
-					});
+					})
+					.then(function() {
+						// Add this to the digest cycle
+						$scope.$apply();
+					});				
+			};
 
-				// Push each station into the empty stations array
-				stations.forEach(function(station) {
-					$scope.stations.push(station);
+			// Open up indexedDB
+			dbPromise
+				.then(function(db) {
+					// Access the stations object store
+					var tx = db.transaction('stations');
+					var stationsStore = tx.objectStore('stations');
+					return stationsStore.get('object:21');
+				})
+				.then(function(val) {
+					// Check if an object exists in stations
+					if (val) {
+						console.log('There were stations in IDB... getStationsIDB has been invoked!');
+						getStationsIDB();
+					} else {
+						getStationsHTTP();
+					}
 				});
-			});
 		};
 
 		// Call the init function
