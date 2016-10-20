@@ -2,8 +2,6 @@
 	'use strict';
 
 	app.controller('plannerCtrl', ['$scope', '$filter', '$state', 'apiCalls', 'xmlToJSON', function($scope, $filter, $state, apiCalls, xmlToJSON) {
-		$scope.stations = [];
-
 		// Initialization function
 		$scope.init = function(){
 			function getStationsHTTP() {
@@ -32,13 +30,13 @@
 						});
 
 					// Push each station into the empty stations array
-					stations.forEach(function(station) {
-						$scope.stations.push(station);
-					});
+					console.log(stations);
+					$scope.stations = stations;
 				});
 			};
 
 			function getStationsIDB() {
+				console.log('There were stations in IDB... getStationsIDB has been invoked!');
 				dbPromise
 					.then(function(db) {
 						// Begin another transaction
@@ -49,9 +47,7 @@
 					})
 					.then(function(stations) {
 						// Push the stations onto $scope
-						stations.forEach(function(station) {
-							$scope.stations.push(station);
-						});
+						$scope.stations = stations;
 					})
 					.then(function() {
 						// Add this to the digest cycle
@@ -70,7 +66,6 @@
 				.then(function(val) {
 					// Check if an object exists in stations
 					if (val) {
-						console.log('There were stations in IDB... getStationsIDB has been invoked!');
 						getStationsIDB();
 					} else {
 						getStationsHTTP();
