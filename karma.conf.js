@@ -28,12 +28,12 @@ module.exports = function(config) {
         'app/scripts/controllers/tripCtrl.js',
         'app/scripts/controllers/scheduleCtrl.js',
         'app/scripts/services/services.js',
-        'app/scripts/spec/index.spec.js',
-        'app/scripts/spec/home.spec.js',
-        'app/scripts/spec/planner.spec.js',
-        'app/scripts/spec/trip.spec.js',
-        'app/scripts/spec/schedule.spec.js',
-        'app/scripts/spec/services.spec.js'
+        'test/spec/index.spec.js',
+        'test/spec/home.spec.js',
+        'test/spec/planner.spec.js',
+        'test/spec/trip.spec.js',
+        'test/spec/schedule.spec.js',
+        'test/spec/services.spec.js'
     ],
 
 
