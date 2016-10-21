@@ -1,7 +1,15 @@
 (function() {
 	'use strict';
 
-	app.controller('tripCtrl',['$scope', '$rootScope', '$timeout', function($scope, $rootScope, $timeout) {
+	app.controller('tripCtrl',['$scope', '$state', '$rootScope', '$timeout', function($scope, $state, $rootScope, $timeout) {
+		(function(){
+			if (!$scope.trips) {
+				$state.go('planner');
+			} else {
+				return;
+			}
+		})();
+
 		$rootScope.$on('trips', function(event, newEvent) {
 			$scope.trips = newEvent;
 		});

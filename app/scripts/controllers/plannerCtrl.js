@@ -2,8 +2,57 @@
 	'use strict';
 
 	app.controller('plannerCtrl', ['$scope', '$filter', '$state', 'apiCalls', 'xmlToJSON', function($scope, $filter, $state, apiCalls, xmlToJSON) {
-		// Initialization function
-		$scope.init = function(){
+		$scope.trips = null;
+		$scope.arrivalSelected = true;
+		$scope.timeSelected = true;
+		$scope.time = null;
+
+		function departureSelectedtoTrue() {
+			$scope.departureSelected = true;
+		};
+
+		function arrivalSelectedtoFalse() {
+			$scope.arrivalSelected = false;
+		};
+
+		function arrivalSelectedtoTrue() {
+			$scope.arrivalSelected = true;
+		};
+
+		function timeSelectedtoFalse() {
+			$scope.timeSelected = false;
+		};
+
+		function formatTime(time) {
+			// Initialize our AM/PM marker variable
+			var marker;
+			// filter it to minimum necessary to check for AM/PM presence
+			var arrivalTime = $filter('date')(time, 'hh:mma');
+			// If the value of arrival time includes PM
+			if (arrivalTime.includes('PM')) {
+				marker = 'PM';
+			} else {
+				marker = 'AM'
+			}
+
+			// strip the AM/PM marker from the time in order to concatenate the '+' symbol
+			arrivalTime = $filter('date')(time, 'hh:mm');
+			// set time up in proper format for API
+			arrivalTime = arrivalTime + '+' + marker;
+
+			return arrivalTime;
+		};
+
+		function getInfoURL(time) {
+			$scope.time = formatTime(time);
+			var URL = 'http://api.bart.gov/api/sched.aspx?cmd=arrive&orig=' + $scope.departureStation + 
+				'&dest=' + $scope.arrivalStation + '&time=' + $scope.time + '&date=now&key=MW9S-E7SL-26DU-VV8V&b=2&a=2&l=1';
+
+			return URL;
+		};
+
+		// Initialization function to populate stations
+		$scope.init = (function(){
 			function getStationsHTTP() {
 				console.log('There were no stations in IDB... getStationsHTTP has been invoked!');
 				// makes call to the stations endpoint of the BART API
@@ -38,6 +87,7 @@
 				});
 			};
 
+			// Invoked if IDB is populated with stations
 			function getStationsIDB() {
 				console.log('There were stations in IDB... getStationsIDB has been invoked!');
 				dbPromise
@@ -74,25 +124,12 @@
 						getStationsHTTP();
 					}
 				});
-		};
-
-		// Call the init function
-		$scope.init();
-
-		$scope.trips = null;
-
-		$scope.arrivalSelected = true;
-		$scope.timeSelected = true;
-		$scope.time = null;
-
-		$scope.reload = function() {
-			$state.reload();
-		};
+		})();
 
 		$scope.setDepartureStation = function(station) {
 				$scope.departureStation = station.abbr['#text'];
-				$scope.departureSelectedtoTrue();
-				$scope.arrivalSelectedtoFalse();
+				departureSelectedtoTrue();
+				arrivalSelectedtoFalse();
 		};
 
 		$scope.setArrivalStation = function(station) {
@@ -101,58 +138,14 @@
 					Materialize.toast('Arrival station must be different than departure station', 4000);
 					return;				
 				} else {
-					$scope.arrivalSelectedtoTrue();
-					$scope.timeSelectedtoFalse();
+					arrivalSelectedtoTrue();
+					timeSelectedtoFalse();
 				}
-		};
-
-		$scope.departureSelectedtoTrue = function() {
-			$scope.departureSelected = true;
-		};
-
-		$scope.arrivalSelectedtoFalse = function() {
-			$scope.arrivalSelected = false;
-		};
-
-		$scope.arrivalSelectedtoTrue = function() {
-			$scope.arrivalSelected = true;
-		};
-
-		$scope.timeSelectedtoFalse = function() {
-			$scope.timeSelected = false;
-		};
-
-		$scope.formatTime = function(time) {
-			// Initialize our AM/PM marker variable
-			var marker;
-			// filter it to minimum necessary to check for AM/PM presence
-			var arrivalTime = $filter('date')(time, 'hh:mma');
-			// If the value of arrival time includes PM
-			if (arrivalTime.includes('PM')) {
-				marker = 'PM';
-			} else {
-				marker = 'AM'
-			}
-
-			// strip the AM/PM marker from the time in order to concatenate the '+' symbol
-			arrivalTime = $filter('date')(time, 'hh:mm');
-			// set time up in proper format for API
-			arrivalTime = arrivalTime + '+' + marker;
-
-			return arrivalTime;
-		};
-
-		$scope.getInfoURL = function(time) {
-			$scope.time = $scope.formatTime(time);
-			var URL = 'http://api.bart.gov/api/sched.aspx?cmd=arrive&orig=' + $scope.departureStation + 
-				'&dest=' + $scope.arrivalStation + '&time=' + $scope.time + '&date=now&key=MW9S-E7SL-26DU-VV8V&b=2&a=2&l=1';
-
-			return URL;
 		};
 
 		$scope.getInfo = function(time) {
 			// Grab the url from getInfoURL
-			var url = $scope.getInfoURL(time);
+			var url = getInfoURL(time);
 
 			// Grab the current time in military format
 			var currentTime = $filter('date')(new Date(), 'HH:mm:ss');
