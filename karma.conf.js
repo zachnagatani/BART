@@ -21,6 +21,7 @@ module.exports = function(config) {
         'bower_components/angular-ui-router/release/angular-ui-router.js',
         'bower_components/angular-mocks/angular-mocks.js',
         'bower_components/jasmine-jquery/lib/jasmine-jquery.js',
+        'app/scripts/idbp.js',
         'app/scripts/main.js',
         'app/scripts/controllers/indexCtrl.js',
         'app/scripts/controllers/homeCtrl.js',

@@ -7,6 +7,7 @@
 		$scope.timeSelected = true;
 		$scope.time = null;
 
+		// Functions to manipulate ng-show
 		function departureSelectedtoTrue() {
 			$scope.departureSelected = true;
 		};
@@ -23,6 +24,7 @@
 			$scope.timeSelected = false;
 		};
 
+		// Formats time for API
 		function formatTime(time) {
 			// Initialize our AM/PM marker variable
 			var marker;
@@ -43,7 +45,9 @@
 			return arrivalTime;
 		};
 
+		// Formats URL for the API
 		function getInfoURL(time) {
+			// Pass user inputted time into formatTime
 			$scope.time = formatTime(time);
 			var URL = 'http://api.bart.gov/api/sched.aspx?cmd=arrive&orig=' + $scope.departureStation + 
 				'&dest=' + $scope.arrivalStation + '&time=' + $scope.time + '&date=now&key=MW9S-E7SL-26DU-VV8V&b=2&a=2&l=1';
@@ -126,12 +130,19 @@
 				});
 		})();
 
+		// Reloads the state if user chooses to plan a new trip
+		$scope.reload = function() {
+			$state.reload();
+		};
+
+		// Sets the departure station for the API
 		$scope.setDepartureStation = function(station) {
 				$scope.departureStation = station.abbr['#text'];
 				departureSelectedtoTrue();
 				arrivalSelectedtoFalse();
 		};
 
+		// Sets the arrival station for the API
 		$scope.setArrivalStation = function(station) {
 				$scope.arrivalStation = station.abbr['#text'];
 				if ($scope.arrivalStation === $scope.departureStation) {
@@ -143,6 +154,7 @@
 				}
 		};
 
+		// Gets the trips from the API
 		$scope.getInfo = function(time) {
 			// Grab the url from getInfoURL
 			var url = getInfoURL(time);
@@ -168,7 +180,7 @@
 					.then(function(response) {
 						return xmlToJSON.dataToDoc(response.data);
 					}, function(error) {
-						// Materialize.toast(message, displayLength, className, completeCallback);
+						// Alert the user of error
 						Materialize.toast('Please reconnect to the internet', 4000);
 					})
 					.then(function(xml) {
@@ -177,8 +189,10 @@
 					.then(function(json) {
 						$scope.trips = json.root.schedule.request.trip;
 					}).then(function() {
-						console.log($scope.trips);
+						// Send the trips up to be received by index and sent
+						// to trips
 						$scope.$emit('tripEvent', $scope.trips);
+						// Navigate to the trip state
 						$state.go('trip');
 					});			
 			}
