@@ -97,8 +97,13 @@
 
 		$scope.setArrivalStation = function(station) {
 				$scope.arrivalStation = station.abbr['#text'];
-				$scope.arrivalSelectedtoTrue();
-				$scope.timeSelectedtoFalse();
+				if ($scope.arrivalStation === $scope.departureStation) {
+					Materialize.toast('Arrival station must be different than departure station', 4000);
+					return;				
+				} else {
+					$scope.arrivalSelectedtoTrue();
+					$scope.timeSelectedtoFalse();
+				}
 		};
 
 		$scope.departureSelectedtoTrue = function() {
@@ -146,25 +151,44 @@
 		};
 
 		$scope.getInfo = function(time) {
+			// Grab the url from getInfoURL
 			var url = $scope.getInfoURL(time);
-			console.log(url);
 
-			apiCalls.makeCall(url)
-				.then(function(response) {
-					return xmlToJSON.dataToDoc(response.data);
-				}, function(error) {
-					// Materialize.toast(message, displayLength, className, completeCallback);
-					Materialize.toast('Please reconnect to the internet', 4000);
-				})
-				.then(function(xml) {
-					return xmlToJSON.xmlToJSON(xml);
-				})
-				.then(function(json) {
-					$scope.trips = json.root.schedule.request.trip;
-				}).then(function() {
-					$scope.$emit('tripEvent', $scope.trips);
-					$state.go('trip');
-				});
+			// Grab the current time in military format
+			var currentTime = $filter('date')(new Date(), 'HH:mm:ss');
+
+			// Convert into new date (Jan 1 1970 works because trips are automatically sent
+			// using today's date) and convert to milliseconds for comparison
+			var current = new Date('Thu Jan 1 1970 ' + currentTime + ' GMT-0800' ).getTime();
+
+			// Convert the user's input time into milliseconds for comparison
+			var timeMil = new Date(time).getTime();
+
+			// If the input time is prior to the current time
+			if (timeMil <= current) {
+				// alert the user and return
+				Materialize.toast('Arrival time cannot be in the past', 4000);
+				return;
+			} else {
+				// else go get the trips from the API
+				apiCalls.makeCall(url)
+					.then(function(response) {
+						return xmlToJSON.dataToDoc(response.data);
+					}, function(error) {
+						// Materialize.toast(message, displayLength, className, completeCallback);
+						Materialize.toast('Please reconnect to the internet', 4000);
+					})
+					.then(function(xml) {
+						return xmlToJSON.xmlToJSON(xml);
+					})
+					.then(function(json) {
+						$scope.trips = json.root.schedule.request.trip;
+					}).then(function() {
+						console.log($scope.trips);
+						$scope.$emit('tripEvent', $scope.trips);
+						$state.go('trip');
+					});			
+			}
 		};
 	}]);
 })();

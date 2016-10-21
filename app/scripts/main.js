@@ -1,6 +1,6 @@
 var app = angular.module('app', ['ui.router', 'ngAnimate']);
 
-var dbPromise = idb.open('bart', 3, function(upgradeDb) {
+var dbPromise = idb.open('bart', 2, function(upgradeDb) {
 	switch(upgradeDb.oldVersion) {
 		case 0:
 			var keyValStore = upgradeDb.createObjectStore('keyval');
@@ -26,13 +26,13 @@ var dbPromise = idb.open('bart', 3, function(upgradeDb) {
 (function(){
 	'use strict';
 
-	if (navigator.serviceWorker) {
-		navigator.serviceWorker.register('sw.js').then(function(reg) {
-			console.log('YOU DID IT!!!' + reg.scope);
-		}).catch(function(error) {
-			console.log('Nope you made a boo boo and uh baa-baa and a ' + error);
-		});
-	}
+	// if (navigator.serviceWorker) {
+	// 	navigator.serviceWorker.register('sw.js').then(function(reg) {
+	// 		console.log('YOU DID IT!!!' + reg.scope);
+	// 	}).catch(function(error) {
+	// 		console.log('Nope you made a boo boo and uh baa-baa and a ' + error);
+	// 	});
+	// }
 
 	app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 		$stateProvider
