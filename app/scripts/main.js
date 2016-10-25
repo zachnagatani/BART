@@ -26,13 +26,14 @@ var dbPromise = idb.open('bart', 2, function(upgradeDb) {
 (function(){
 	'use strict';
 
-	// if (navigator.serviceWorker) {
-	// 	navigator.serviceWorker.register('sw.js').then(function(reg) {
-	// 		console.log('YOU DID IT!!!' + reg.scope);
-	// 	}).catch(function(error) {
-	// 		console.log('Nope you made a boo boo and uh baa-baa and a ' + error);
-	// 	});
-	// }
+	// If supported, register the service worker 
+	if (navigator.serviceWorker) {
+		navigator.serviceWorker.register('sw.js').then(function(reg) {
+			console.log('Service worker registered in scope: ' + reg.scope);
+		}).catch(function(error) {
+			console.log('Do you even serviceworker, bro? Error:' + error);
+		});
+	}
 
 	app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 		$stateProvider

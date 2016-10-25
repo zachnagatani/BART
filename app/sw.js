@@ -5,7 +5,10 @@ this.addEventListener('install', function(event) {
 		caches.open(staticCache)
 			.then(function(cache) {
 				return cache.addAll([
+					'http://localhost:9000/index.html',
+					'http://localhost:9000/sw.js',
 					'http://localhost:9000/styles/main.css',
+					'http://localhost:9000/scripts/idbp.js',
 					'http://localhost:9000/scripts/main.js',
 					'http://localhost:9000/scripts/services/services.js',
 					'http://localhost:9000/scripts/controllers/indexCtrl.js',
@@ -21,12 +24,10 @@ this.addEventListener('install', function(event) {
 					'http://localhost:9000/images/bartmap.png',
 					'http://localhost:9000/bower_components/materialize/bin/materialize.css',
 					'http://localhost:9000/bower_components/jquery/dist/jquery.js',
-					'http://localhost:9000/bower_components/modernizr/modernizr.js',
 					'http://localhost:9000/bower_components/angular/angular.js',
 					'http://localhost:9000/bower_components/angular-ui-router/release/angular-ui-router.js',
 					'http://localhost:9000/bower_components/angular-aria/angular-aria.js',
 					'http://localhost:9000/bower_components/angular-animate/angular-animate.js',
-					'http://localhost:9000/bower_components/angular-messages/angular-messages.js',
 					'http://localhost:9000/bower_components/materialize/bin/materialize.js',
 					'http://localhost:9000/bower_components/materialize/fonts/roboto/Roboto-Regular.woff2'
 				])
