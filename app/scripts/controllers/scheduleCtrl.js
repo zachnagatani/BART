@@ -15,7 +15,7 @@
 			// Called when there is no local copy of the schedule in IDB
 			function getScheduleHTTP(objStore) {
 				console.log('This schedule wasn\'t in IDB... getScheduleHTTP has been invoked!');
-				apiCalls.makeCall('http://api.bart.gov/api/sched.aspx?cmd=routesched&route=' + routeNum + '&key=MW9S-E7SL-26DU-VV8V')
+				apiCalls.makeCall('https://api.bart.gov/api/sched.aspx?cmd=routesched&route=' + routeNum + '&key=MW9S-E7SL-26DU-VV8V')
 					.then(function(response) {
 						// Convert data to an xml node
 						return xmlToJSON.dataToDoc(response.data);

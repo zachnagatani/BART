@@ -49,7 +49,7 @@
 		function getInfoURL(time) {
 			// Pass user inputted time into formatTime
 			$scope.time = formatTime(time);
-			var URL = 'http://api.bart.gov/api/sched.aspx?cmd=arrive&orig=' + $scope.departureStation + 
+			var URL = 'https://api.bart.gov/api/sched.aspx?cmd=arrive&orig=' + $scope.departureStation + 
 				'&dest=' + $scope.arrivalStation + '&time=' + $scope.time + '&date=now&key=MW9S-E7SL-26DU-VV8V&b=2&a=2&l=1';
 
 			return URL;
@@ -60,7 +60,7 @@
 			function getStationsHTTP() {
 				console.log('There were no stations in IDB... getStationsHTTP has been invoked!');
 				// makes call to the stations endpoint of the BART API
-				apiCalls.makeCall('http://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V').then(function(response) {
+				apiCalls.makeCall('https://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V').then(function(response) {
 					return response.data;
 				}).then(function(data) {
 					// turns the data into an XML node
