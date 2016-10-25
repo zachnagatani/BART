@@ -1,15 +1,16 @@
-html, body, main {
+html, body {
 	height: 100%;
 }
 
 main {
+	height: calc(100% + 64px);
 	position: relative;
 	bottom: 64px;
 }
 
 nav {
 	background-color: $dark-primary-color;
-	position: relative;
+	position: fixed;
 	z-index: 1;
 }
 

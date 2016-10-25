@@ -86,7 +86,6 @@
 						});
 
 					// Push each station into the empty stations array
-					console.log(stations);
 					$scope.stations = stations;
 				});
 			};
@@ -161,13 +160,17 @@
 
 			// Grab the current time in military format
 			var currentTime = $filter('date')(new Date(), 'HH:mm:ss');
+			var userTime = $filter('date')(time, 'HH:mm:ss');
 
 			// Convert into new date (Jan 1 1970 works because trips are automatically sent
 			// using today's date) and convert to milliseconds for comparison
 			var current = new Date('Thu Jan 1 1970 ' + currentTime + ' GMT-0800' ).getTime();
+			// We do this for the user's inputted time, just in case the app is being used
+			// in a timezone other than PST (though BART is on the West Coast)
+			var pacificTime = new Date('Thu Jan 1 1970 ' + userTime + ' GMT-0800');
 
 			// Convert the user's input time into milliseconds for comparison
-			var timeMil = new Date(time).getTime();
+			var timeMil = new Date(pacificTime).getTime();
 
 			// If the input time is prior to the current time
 			if (timeMil <= current) {
