@@ -17,7 +17,7 @@
 		});
 
 		// Add an ID property to each trip to allow for tabbed navigation
-  		$scope.addID = function() {
+  		function addID() {
   			// Returning a promise allows us to show the first trip
   			return new Promise(function(resolve) {
 	  			// Initiate ID at 1
@@ -38,11 +38,10 @@
   		};
 
   		function showTrip1() {
-  			console.log('is it showing?');
   			$('#trip1').css('display', 'block');
   		};
 
   		// Use $timeout to allow for the controller to receive the trips
-		$timeout($scope.addID, 1000);
+		$timeout(addID, 1000);
 	}]);
 })();
