@@ -18,16 +18,28 @@
 
 		// Add an ID property to each trip to allow for tabbed navigation
   		$scope.addID = function() {
-  			// Initiate ID at 1
-			var id = 1;
-			// Increment and add the ID for each trip
-			$scope.trips.forEach(function(trip) {
-				trip.id = id;
-				id++;
-			});
+  			// Returning a promise allows us to show the first trip
+  			return new Promise(function(resolve) {
+	  			// Initiate ID at 1
+				var id = 1;
+				// Increment and add the ID for each trip
+				$scope.trips.forEach(function(trip) {
+					trip.id = id;
+					id++;
+				});
 
-			// Wait to intialize tabs until trips have ID's
-			$('ul.tabs').tabs();	
+				// Wait to intialize tabs until trips have ID's
+				$('ul.tabs').tabs();
+				resolve();
+  			})
+  			.then(function() {
+  				showTrip1();
+  			});
+  		};
+
+  		function showTrip1() {
+  			console.log('is it showing?');
+  			$('#trip1').css('display', 'block');
   		};
 
   		// Use $timeout to allow for the controller to receive the trips
