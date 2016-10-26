@@ -74,12 +74,12 @@
 					// Check for an existing object in our objectstore
 					var tx = db.transaction(objStore);
 					var objectStore = tx.objectStore(objStore);
-					return objectStore.get('object:96');
+					return objectStore.getAllKeys();
 				})
 				.then(function(val) {
 					// If an object exists, we have a copy of the schedule
 					// in IDB
-					if (val) {
+					if (val.length !== 0) {
 						getScheduleIDB(objStore);
 					// If no object exists, we don't have a copy in IDB
 					} else {

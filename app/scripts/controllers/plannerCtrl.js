@@ -117,11 +117,11 @@
 					// Access the stations object store
 					var tx = db.transaction('stations');
 					var stationsStore = tx.objectStore('stations');
-					return stationsStore.get('object:21');
+					return stationsStore.getAllKeys();
 				})
 				.then(function(val) {
 					// Check if an object exists in stations
-					if (val) {
+					if (val.length !== 0) {
 						getStationsIDB();
 					} else {
 						getStationsHTTP();

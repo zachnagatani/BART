@@ -6,9 +6,9 @@ this.addEventListener('install', function(event) {
 			.then(function(cache) {
 				return cache.addAll([
 					'/',
-					'/styles/vendor.css',
+					// '/styles/vendor.css',
 					'/styles/main.css',
-					'/scripts/vendor.js',
+					// '/scripts/vendor.js',
 					'/scripts/main.js',
 					'/templates/home.html',
 					'/templates/planner.html',
