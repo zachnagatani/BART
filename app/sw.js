@@ -1,4 +1,4 @@
-var staticCache = 'static-cache-v12';
+var staticCache = 'static-cache-v16';
 
 this.addEventListener('install', function(event) {
 	event.waitUntil(
@@ -6,9 +6,10 @@ this.addEventListener('install', function(event) {
 			.then(function(cache) {
 				return cache.addAll([
 					'/',
-					// '/styles/vendor.css',
+					'/index.html',
+					'/styles/vendor.css',
 					'/styles/main.css',
-					// '/scripts/vendor.js',
+					'/scripts/vendor.js',
 					'/scripts/main.js',
 					'/templates/home.html',
 					'/templates/planner.html',
@@ -42,6 +43,7 @@ this.addEventListener('activate', function(event) {
 });
 
 function fetchAndCache(myCache, request) {
+	console.log('called');
 	return caches.open(myCache).then(function(cache) {
 		return cache.match(request.url).then(function(response) {
 			if (response) return response;
@@ -56,8 +58,8 @@ function fetchAndCache(myCache, request) {
 
 this.addEventListener('fetch', function(event) {
 	var requestURL = new URL(event.request.url);
-
-	if(requestURL.href.startsWith('/') && !requestURL.href.startsWith('/browser-sync/')) {
+	
+	if(requestURL.origin === location.origin && !requestURL.href.includes('/browser-sync/')) {
 		event.respondWith(fetchAndCache(staticCache, event.request));
 	}
 });
