@@ -43,7 +43,6 @@ this.addEventListener('activate', function(event) {
 });
 
 function fetchAndCache(myCache, request) {
-	console.log('called');
 	return caches.open(myCache).then(function(cache) {
 		return cache.match(request.url).then(function(response) {
 			if (response) return response;
